@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include sentinelone"
+      include_role:
+        name: "sentinelone"

@@ -1,0 +1,57 @@
+---
+# tasks file for sentinelone
+- name: S1 | Setup vars
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}.yml"
+    - '{{ansible_os_family}}-{{ansible_lsb.major_release}}.yml'
+    - "{{ ansible_os_family }}.yml"
+    - "default.yml"
+
+- name: S1 | Check installation
+  stat:
+    path: "{{s1_install_dir}}/bin/sentinelctl"
+  register: sentinelctl_exists
+
+- name: S1 | Installation
+  block:
+    - name: S1 | Copy package
+      copy:
+        src: "{{ s1_package }}"
+        dest: "/tmp/{{ s1_package}}"
+    
+    - name: S1 | Install package (yum)
+      yum:
+        name: "/tmp/{{ s1_package}}"
+      when: ansible_os_family == "RedHat"
+      register: s1_installation_yum
+    
+    - name: S1 | Install package (apt)
+      apt:
+        name: "/tmp/{{ s1_package}}"
+      when: ansible_os_family == "Debian"
+      register: s1_installation_apt
+  when: sentinelctl_exists.stat.exists == False
+
+- name: Check registration
+  stat:
+    path: "{{s1_install_dir}}/configuration/basic.conf"
+  register: s1_registration
+
+- name: S1 | Register Agent
+  command: "{{s1_install_dir}}/bin/sentinelctl management token set {{ s1_site_token }}"
+  #when: s1_installation_yum.changed == true or s1_installation_deb.changed == true
+  when: s1_registration.stat.exists == false
+
+- name: S1 | Agent Status
+  command: "{{s1_install_dir}}/bin/sentinelctl control status"
+  failed_when: false
+  changed_when: s1_agent_status.stdout == "Agent must be running in order to execute this command"
+  register: s1_agent_status
+
+- name: Sentinel Agent Started/Enabled
+  service:
+    name: "{{ s1_daemon }}"
+    state: restarted
+    enabled: yes
+  when: s1_agent_status is changed

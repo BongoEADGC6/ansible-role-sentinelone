@@ -1,0 +1,8 @@
+---
+- hosts: all
+  remote_user: admin
+  become: yes
+  vars:
+    s1_site_token: "INSERT TESTSTRING HERE"
+  roles:
+    - sentinelone
