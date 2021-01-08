@@ -1,2 +1,6 @@
 ---
 # handlers file for sentinelone
+- name: Restart S1 agent
+  service:
+    name: "{{ s1_daemon }}"
+    state: restarted

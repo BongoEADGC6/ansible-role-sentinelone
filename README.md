@@ -25,15 +25,11 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: bongoeadgc6.sentenielone, 
+              s1_package_url: "http://hostname/sentinelagent.rpm" }
 
 License
 -------
 
 BSD
 
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
-# ansible-role-sentinelone

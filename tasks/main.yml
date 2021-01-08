@@ -16,8 +16,8 @@
 - name: S1 | Installation
   block:
     - name: S1 | Copy package
-      copy:
-        src: "{{ s1_package }}"
+      get_url:
+        src: "{{ s1_package_url }}"
         dest: "/tmp/{{ s1_package}}"
     
     - name: S1 | Install package (yum)
@@ -48,10 +48,11 @@
   failed_when: false
   changed_when: s1_agent_status.stdout == "Agent must be running in order to execute this command"
   register: s1_agent_status
+  notify: Restart S1 agent
 
 - name: Sentinel Agent Started/Enabled
   service:
     name: "{{ s1_daemon }}"
-    state: restarted
+    state: started
     enabled: yes
-  when: s1_agent_status is changed
+  #when: s1_agent_status is changed
