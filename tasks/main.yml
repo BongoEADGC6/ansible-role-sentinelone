@@ -19,6 +19,7 @@
       get_url:
         src: "{{ s1_package_url }}"
         dest: "/tmp/{{ s1_package}}"
+      check_mode: yes
     
     - name: S1 | Install package (yum)
       yum:
