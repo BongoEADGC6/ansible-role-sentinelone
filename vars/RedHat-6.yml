@@ -1,1 +1,2 @@
 s1_daemon: sentineld
+s1_package: s1_installer.rpm
