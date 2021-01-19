@@ -38,6 +38,7 @@
   stat:
     path: "{{s1_install_dir}}/configuration/basic.conf"
   register: s1_registration
+  check_mode: false
 
 - name: S1 | Register Agent
   command: "{{s1_install_dir}}/bin/sentinelctl management token set {{ s1_site_token }}"
