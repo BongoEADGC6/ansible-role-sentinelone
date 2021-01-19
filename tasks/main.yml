@@ -17,7 +17,7 @@
   block:
     - name: S1 | Copy package
       get_url:
-        src: "{{ s1_package_url }}"
+        url: "{{ s1_package_url }}"
         dest: "/tmp/{{ s1_package}}"
       check_mode: yes
     
