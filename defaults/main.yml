@@ -1,4 +1,5 @@
 ---
 # defaults file for sentinelone
+sentineone_install: false
 s1_install_dir: '/opt/sentinelone'
 s1_daemon: sentinelone
