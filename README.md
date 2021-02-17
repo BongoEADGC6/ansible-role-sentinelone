@@ -12,16 +12,19 @@ servers or workstations that you plan to install this.
 Role Variables
 --------------
 
-`sentineone_install` - Set to true to allow installation of the agent. This is good for 
+`sentineone_install` - REQUIRED Set to true to allow installation of the agent. This is good for 
 
 controlling installs per group or hostname (Default: false)
+
+`s1_package_url` - REQUIRED URL for the source of the package required for install
+
+ (i.e. "http://hostname/sentinelagent.rpm")
 
 `s1_install_dir` - Directory to install the SentinelOne agent (Default: /opt/sentinelone)
 
 `s1_daemon` - Name for the service daemon for each Operating system
 
-`s1_package` - Name for the temporary file that is added to the host for
-installation
+`s1_package` - Name for the temporary file that is added to the host for installation
 
 
 Dependencies
