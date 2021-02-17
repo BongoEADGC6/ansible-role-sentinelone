@@ -1,7 +1,7 @@
 SentinelOne Agent
 =========
 
-An ansible role to install SentinelOne's antivirus agent on Linux us..
+An ansible role to install SentinelOne's antivirus agent on Linux systems.
 
 Requirements
 ------------
