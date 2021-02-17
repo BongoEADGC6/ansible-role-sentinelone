@@ -35,8 +35,11 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: bongoeadgc6.sentenielone, 
-              s1_package_url: "http://hostname/sentinelagent.rpm" }
+         - role: bongoeadgc6.sentenielone
+           vars:
+              sentinelone_install: true
+              s1_package_url: "http://hostname/sentinelagent.rpm"
+
 
 License
 -------
